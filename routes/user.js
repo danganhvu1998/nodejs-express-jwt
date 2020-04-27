@@ -10,6 +10,13 @@ router.get('/',(req,res)=>{
     });
 });
 
+router.get('/hello',(req,res)=>{
+    res.status(200).send({
+        status:true,
+        response:"Hello "+ req.session.userData.name
+    });
+});
+
 router.post('/register', (req, res, next) =>{
     console.log(req.body)
     userServices.createUser(req.body).then(

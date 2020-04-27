@@ -1,12 +1,49 @@
 const express = require('express');
 const bodyParser = require('body-parser')
-const mysql = require('mysql')
 const userRoute = require('./routes/user')
+const authJwt = require('.//common/authJwt')
 require('dotenv').config()
 
 let app = express();
 // parse application/json
 app.use(bodyParser.json());
+
+app.use(async (req, res, next) => {
+    try {
+        let authHeader = req.header('Authorization');
+        let sessionID = authHeader.split(' ')[1];
+        if (sessionID) {
+            let userData = authJwt.verifyToken(sessionID);
+            console.log(userData)
+            if (userData) {
+                req.session = {};
+                req.session.userData = userData;
+                req.session.sessionID = sessionID;
+            } else {
+                return res.status(401).send({
+                    status: false,
+                    error: {
+                        reason: "Invalid Sessiontoken",
+                        code: 401
+                    }
+                });
+            }
+        }
+        next()
+    } catch {
+        console.log("No Auth")
+        if( authJwt.isAuthRequired(req.method, req.originalUrl) ){
+            return res.status(401).send({
+                status: false,
+                error: {
+                    reason: "Invalid Sessiontoken",
+                    code: 401
+                }
+            });
+        }
+        next()
+    }
+})
 
 app.get('/',(req,res)=>{
     res.status(200).send({

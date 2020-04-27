@@ -2,6 +2,11 @@ const userServices =  require('./../services/userServices.js')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
+const authRoutes = [
+    { path: '/user/hello', method: 'GET' },
+    { path: '/user/password', method: 'PUT' }
+];
+
 const SECRET_KEY = process.env.JWT_SECRET;
 
 exports.isAuthRequired = (httpMethod, url) => {
