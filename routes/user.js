@@ -1,5 +1,6 @@
 const express = require('express')
 const userServices =  require('./../services/userServices.js')
+const authJwt = require('./../common/authJwt')
 let router = express.Router();
 
 router.get('/',(req,res)=>{
@@ -19,7 +20,26 @@ router.post('/register', (req, res, next) =>{
         }, error => {
             res.statusCode = 400
             res.data = { 
-                status: true,
+                status: false,
+                error: "ah shit goes wrong"
+            }
+            next()
+        }
+    )
+})
+
+router.post('/login', (req, res, next) =>{
+    console.log(req.body)
+    userServices.authenUser(req.body).then(
+        result => {
+            result = JSON.stringify(result)
+            res.statusCode = 200
+            res.data = { userInfo: result, sessionID: authJwt.generateJWTToken(result) }
+            next()
+        }, error => {
+            res.statusCode = 400
+            res.data = { 
+                status: false,
                 error: "ah shit goes wrong"
             }
             next()
