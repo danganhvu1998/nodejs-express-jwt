@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser')
 const userRoute = require('./routes/user')
-const authJwt = require('.//common/authJwt')
+const authJwt = require('./common/authJwt')
 require('dotenv').config()
 
 let app = express();

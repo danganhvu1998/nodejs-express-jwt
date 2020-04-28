@@ -40,6 +40,8 @@ router.post('/login', (req, res, next) =>{
     userServices.authenUser(req.body).then(
         result => {
             result = JSON.stringify(result)
+            result = JSON.parse(result)
+            console.log(result, typeof(result))
             res.statusCode = 200
             res.data = { userInfo: result, sessionID: authJwt.generateJWTToken(result) }
             next()
