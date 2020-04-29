@@ -41,10 +41,10 @@ var bodyParser = require("body-parser");
 var user_1 = require("./routes/user");
 var authJwt = require("./common/authJwt");
 require('dotenv').config();
-var app = express();
+exports.app = express();
 // parse application/json
-app.use(bodyParser.json());
-app.use(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+exports.app.use(bodyParser.json());
+exports.app.use(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     var authHeader, sessionID, userData;
     return __generator(this, function (_a) {
         try {
@@ -86,14 +86,14 @@ app.use(function (req, res, next) { return __awaiter(void 0, void 0, void 0, fun
         return [2 /*return*/];
     });
 }); });
-app.get('/', function (req, res) {
+exports.app.get('/', function (req, res) {
     res.status(200).send({
         status: true,
         response: 'Hello World!'
     });
 });
-app.use('/user', user_1.router);
-app.use(function (req, res, next) {
+exports.app.use('/user', user_1.router);
+exports.app.use(function (req, res, next) {
     if (!res['data']) {
         return res.status(404).send({
             status: false,
@@ -105,4 +105,3 @@ app.use(function (req, res, next) {
     }
     res.status(res.statusCode || 200).send(res['data']);
 });
-app.listen(3030);

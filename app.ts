@@ -4,7 +4,7 @@ import  {router} from './routes/user'
 import authJwt = require('./common/authJwt')
 require('dotenv').config()
 
-let app = express();
+export let app = express();
 // parse application/json
 app.use(bodyParser.json());
 
@@ -67,5 +67,3 @@ app.use((req, res, next) => {
 
     res.status(res.statusCode || 200).send(res['data'] );
 })
-
-app.listen(3030)
