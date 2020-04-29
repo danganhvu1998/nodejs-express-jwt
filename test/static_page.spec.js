@@ -50,11 +50,9 @@ describe("Test /user", () => {
                 'name': 'testUser',
                 'email': 'testEmail@test.test',
                 'password': 'lotOfTests'
-            }).expect(response.statusCode).toBe(200)
-            .end(function(err, res) {
-                if (err) return done(err);
-                done();
             })
+        expect(response.statusCode).toBe(200)
+        done();
         // console.log(223123)
         // expect(response.statusCode).toBe(200);
         // console.log(323123)
