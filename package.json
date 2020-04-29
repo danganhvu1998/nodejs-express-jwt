@@ -4,7 +4,7 @@
   "description": "just testing",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --forceExit --detectOpenHandles --maxWorkers=1",
     "dev": "nodemon index.js"
   },
   "author": "",
@@ -19,6 +19,7 @@
     "mysql": "^2.18.1"
   },
   "devDependencies": {
+    "axios": "^0.19.2",
     "jest": "^25.5.0",
     "nodemon": "^2.0.3",
     "supertest": "^4.0.2"

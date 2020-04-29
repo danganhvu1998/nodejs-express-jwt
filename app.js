@@ -71,7 +71,7 @@ exports.app.use(function (req, res, next) { return __awaiter(void 0, void 0, voi
             next();
         }
         catch (_b) {
-            console.log("No Auth");
+            // console.log("No Auth")
             if (authJwt.isAuthRequired(req.method, req.originalUrl)) {
                 return [2 /*return*/, res.status(401).send({
                         status: false,

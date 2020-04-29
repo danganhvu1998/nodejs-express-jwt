@@ -31,7 +31,7 @@ app.use(async (req, res, next) => {
         }
         next()
     } catch {
-        console.log("No Auth")
+        // console.log("No Auth")
         if( authJwt.isAuthRequired(req.method, req.originalUrl) ){
             return res.status(401).send({
                 status: false,

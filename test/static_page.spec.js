@@ -16,4 +16,19 @@ describe("Test /user", () => {
         )
         expect(response.statusCode).toBe(200);
     })
+    test('post /user/register', async (done) => {
+
+        let response = await request(App)
+            .post('/user/register')
+            .set('Content-Type', 'application/json')
+            .set('Accept', 'application/json')
+            .send({
+                'name': 'testUser',
+                'email': 'testEmail@test.test',
+                'password': 'lotOfTests'
+            })
+        expect(response.statusCode).toBe(200);
+        console.log(response.statusCode)
+        done()
+    })
 })
